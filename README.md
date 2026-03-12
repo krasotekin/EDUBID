@@ -1,8 +1,10 @@
 # EDUBID
 
-# EduBid Guide
 
-나라장터 공고 중 AI 관련 교육운영 용역을 필터링하고, 업스테이지 API를 활용해 공고 진단, 제안 작성 가이드, 초안 피드백을 제공하는 프로토타입입니다.
+### 나라장터 공고 중 AI 관련 교육운영 용역을 필터링하고, 업스테이지 API를 활용해 공고 진단, 제안 작성 가이드, 초안 피드백을 제공하는 프로토타입입니다.
+
+
+
 
 ## 왜 만들었는가
 
@@ -34,9 +36,12 @@
    - 실제 평가에서 약할 수 있는 이유  
    를 피드백합니다.
 
-## 사용한 기술
+## 사용 기술
 
-- Python
+- LLM (Large Language Model)
+- Prompt Engineering 
+- RAG (Retrieval Augmented Generation)
+- Python, REST API 
 - Streamlit
 - Upstage API
 - 나라장터 OpenAPI
@@ -57,34 +62,46 @@
 
 ## 구현하면서 느낀 점
 
-좋았던 점:
+### 좋았던 점:
 - 짧은 시간 안에 실제로 동작하는 프로토타입을 만들 수 있을 정도로 진입장벽이 낮았습니다.
 - 단순 요약이 아니라 작성 가이드와 피드백 같은 업무형 출력으로 확장하기 쉬웠습니다.
 - 공고 데이터와 결합했을 때 "문서를 읽고 바로 액션으로 연결하는" 흐름을 빠르게 시험해볼 수 있었습니다.
 
-아쉬웠던 점:
+### 아쉬웠던 점:
 - 이번 버전은 공고 목록과 제목/기관 정보를 중심으로 구현했기 때문에, 첨부된 제안요청서 PDF/HWP까지 직접 읽히면 훨씬 더 강력해질 수 있습니다.
 - 실제 서비스 수준으로 가려면 문서 파싱, 구조화 추출, 평가항목 매핑까지 추가로 붙이는 것이 좋습니다.
 
+
 ## 실행 방법
 
-### 1. 프로젝트 폴더로 이동
+#### 1. 프로젝트 폴더로 이동
 cd ~/Desktop/edubid-guide
 
-### 2. 가상환경 활성화
-source .venv/bin/activate
-### 3. 패키지 설치
-pip install -r requirements.txt
-### 4. 앱 실행
-python -m streamlit run app.py
-### 환경변수
-
+#### 2. 환경변수 설정 
 프로젝트 루트에 .env 파일을 만들고 아래 값을 넣어야 합니다.
 
+```sh
 UPSTAGE_API_KEY=your_upstage_api_key
 DATA_GO_KR_SERVICE_KEY=your_data_go_kr_service_key
+```
 
-프로젝트 구조
+#### 3. 가상환경 활성화
+```sh
+$ source .venv/bin/activate
+```
+
+#### 3. 패키지 설치
+```sh
+$ pip install -r requirements.txt
+```
+
+#### 4. 앱 실행
+```sh
+$ python -m streamlit run app.py
+```
+
+### 프로젝트 구조
+```log
 edubid-guide/
 ├─ app.py
 ├─ requirements.txt
@@ -93,7 +110,7 @@ edubid-guide/
 ├─ .gitignore
 └─ services/
    └─ g2b_api.py
-
+```
 ### 현재 한계
 
 AI 관련 교육운영 공고 여부를 제목/기관명 기반 키워드로 우선 필터링합니다.
@@ -101,8 +118,3 @@ AI 관련 교육운영 공고 여부를 제목/기관명 기반 키워드로 우
 제안요청서 원문 PDF/HWP를 직접 읽는 기능은 아직 붙이지 않았습니다.
 
 아직 저장 기능이나 사용자별 이력 관리는 없습니다.
-
-
-### 한 줄 요약
-
-Upstage API를 활용해 나라장터의 AI 관련 교육운영 공고를 필터링하고, 공고별 제안 작성 가이드와 초안 피드백을 제공하는 프로토타입입니다.
